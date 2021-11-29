@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate, get_user_model
 
 from users import services as user_services
 
@@ -34,6 +34,7 @@ class SignUpSerializer(serializers.Serializer):
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(min_length=8, max_length=20)
+    
 
     
     def validate_login(self, email):
@@ -43,8 +44,16 @@ class LoginSerializer(serializers.Serializer):
                     'email':'This users does not exist'
                 }
             )
-        return email   
+        return email 
     
+    #def validate_password(self, password):
+    #    if User.objects.filter(password!=password).exists():
+    #        raise serializers.ValidationError(
+    #            {
+    #                'password':'Password is wrong'
+    #            }
+    #        )
+    #    return password 
     
 
 class UserDetailSerializer(serializers.ModelSerializer):

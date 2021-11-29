@@ -36,7 +36,7 @@ class UserViewSet(viewsets.ModelViewSet):
         methods=['POST'],
         detail=False,
         url_path='users/sign-up',
-        serializer_class=user_serializers.SignUpSerializer,
+        serializer_class=user_serializers.SignUpSerializer
         
     )
     def sign_up(self, request):
@@ -53,6 +53,7 @@ class UserViewSet(viewsets.ModelViewSet):
         detail=False,
         url_path='users/login',
         serializer_class=user_serializers.LoginSerializer
+
     )
     def login(self, request):
         serializer = user_serializers.LoginSerializer(data=request.data)
@@ -62,12 +63,12 @@ class UserViewSet(viewsets.ModelViewSet):
         response_data = user_serializers.UserDetailSerializer(user).data
         response_data.update(user_services.get_tokens_for_user(user=user))
         return Response(response_data, status=status.HTTP_201_CREATED)
-        """
-        1. Создать сериалайзер
-        2. Валидировать данные
-        3. Получить юзера
-        :param request:
-        :return:
-        """
+     #   """
+     #   1. Создать сериалайзер
+     #   2. Валидировать данные
+     #   3. Получить юзера
+      #  :param request:
+      #  :return:
+      #  """
 
 # Create your views here.
